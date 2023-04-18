@@ -30,10 +30,10 @@
  		<h1>Cadastro de usuário</h1>
  		
   		<label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" value = "<% out.println(nome); %>">
+        <input type="text" name="nome" id="nome" value = "${param.nome}">
         
         <label for="email">E-mail:</label>
-        <input type="text" name="email" id="email" value = "<%=email%>">
+        <input type="text" name="email" id="email" value = "${param.email}">
         </br></br>
         
         <label for="senha1">Senha:</label>
@@ -51,16 +51,15 @@
         
         <a class="btn btn-primary" href="index.html" role="button">Voltar</a>
 </form>
-</div>
-<%
- String senha1 = request.getParameter("senha1");
- String senha2 = request.getParameter("senha2");
- 
- if(senha1 != senha2){ %>
-	 <div class="alert alert-danger" role="alert">
-	  <%nome %> +
+	<%
+	String senha1 = request.getParameter("senha1");
+	String senha2 = request.getParameter("senha2");
+	if(senha1 != senha2){ %>
+	<hr>
+	<div class="alert alert-danger" role="alert">
+	  <%=nome %><span>, as senhas informadas não são iguais.</span>
 	</div>
- }
- %>
+	<%} %>
+</div>
 </body>
 </html>
