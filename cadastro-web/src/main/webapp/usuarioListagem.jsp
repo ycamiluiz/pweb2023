@@ -5,23 +5,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Cadastro-web</title>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
 <h1>Lista de Usuarios</h1>
 
-<table border = "1">
+<table border = "1" class="table">
+<thead>
+	<tr>
+		<th>ID</th>
+		<th>Nome</th>
+		<th>Email</th>
+	</tr>
+</thead>
+<tbody>
 	<c:forEach var = "usuario" items = "${usuarios}" varStatus = "id">
-		<tr>
+		<tr class="${id.count % 2 == 0 ? 'table-primary' :  'table-secondary'}">
 			<td>${usuario.id}</td>
 			<td>${usuario.nome}</td>
-			<td>${usuario.email}</td>
+			<td><a href="mailto:${usuario.email}">${usuario.email}</a></td>
 		</tr>
 	</c:forEach>
+</tbody>
 </table>
 
-<a href="usuarioCadastro.jsp">Clique aqui para se cadastrar!</a>
-</table>
+<a href="usuarioCadastro.jsp" class="btn btn-primary">Clique aqui para se cadastrar!</a>
+</div>
 </body>
 </html>
