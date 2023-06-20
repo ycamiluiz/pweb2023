@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifgoiano.entidade.Usuario;
+import br.edu.ifgoiano.repositorio.UsuarioRepositorio;
 
 @WebServlet("/cadastroUsuario")
 public class CadastroUsuarioServlet extends HttpServlet {
@@ -35,6 +36,8 @@ public class CadastroUsuarioServlet extends HttpServlet {
 			usu.setEmail(req.getParameter("email"));
 			usu.setSenha(senha1);
 			
+			UsuarioRepositorio repositorio = new UsuarioRepositorio();
+			
 			lstDeUsuario.add(usu);
 			//redirecionar o usuário para tela de login
 			resp.sendRedirect("index.html");
@@ -46,8 +49,8 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setAttribute("usuarios", lstDeUsuario);
+		UsuarioRepositorio repositorio = new UsuarioRepositorio();
+		req.setAttribute("usuarios", repositorio.listarUsuarios());
 		req.getRequestDispatcher("usuarioListagem.jsp").forward(req, resp);
 
 	}
