@@ -19,6 +19,14 @@ public class CadastroUsuarioServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7869758393435911873L;
 	
+	//Simular o banco de dados
+	private List<Usuario> lstDeUsuario;
+	
+	@Override
+	public void init() throws ServletException {
+		this.lstDeUsuario = new ArrayList<Usuario>();
+	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String senha1 = req.getParameter("senha1");
@@ -32,8 +40,8 @@ public class CadastroUsuarioServlet extends HttpServlet {
 			usu.setSenha(senha1);
 			
 			UsuarioRepositorio repositorio = new UsuarioRepositorio();
-			repositorio.inserirUsuario(usu);
 			
+			lstDeUsuario.add(usu);
 			
 			//redirecionar o usuário para a página de login
 			resp.sendRedirect("index.html");
@@ -52,4 +60,14 @@ public class CadastroUsuarioServlet extends HttpServlet {
 		req.getRequestDispatcher("usuarioListagem.jsp").forward(req, resp);
 	}
 	
+	@Override
+	public void destroy() {
+		try {
+			UsuarioRepositorio.conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.lstDeUsuario.clear();
+	}
 }
