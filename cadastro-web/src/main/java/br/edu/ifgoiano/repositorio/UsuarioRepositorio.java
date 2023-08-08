@@ -44,12 +44,12 @@ public class UsuarioRepositorio {
 		
 	}
 
-	public void inserirUsuario(Usuario usu) {
+	public void inserirUsuario(Usuario usuario) {
 		
 		//Criar a SQL de insert 
 		StringBuilder sql = new StringBuilder();
-		sql.append("insert into usuario");
-		sql.append("(nome, email, senha)");
+		sql.append("insert into usuario ");
+		sql.append("(nome, email, senha) ");
 		sql.append("values(?, ?, ?)");
 		
 		//Abrir uma conexão
@@ -58,7 +58,10 @@ public class UsuarioRepositorio {
 			//Preparar a SQL para ser executada
 			PreparedStatement pst = conn.prepareStatement(sql.toString());){
 			
-			//Executar a SQL 
+			//Executar a SQL
+			pst.setString(1, usuario.getNome());
+			pst.setString(2, usuario.getEmail());
+			pst.setString(3, usuario.getSenha());
 			pst.execute();
 			
 			conn.commit();
@@ -69,18 +72,5 @@ public class UsuarioRepositorio {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

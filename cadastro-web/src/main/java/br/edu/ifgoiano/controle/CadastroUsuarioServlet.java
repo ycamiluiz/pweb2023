@@ -26,13 +26,13 @@ public class CadastroUsuarioServlet extends HttpServlet {
 		
 		//Verificar se as senhas são iguais
 		if(senha1.equals(senha2)) {
-			Usuario usu = new Usuario();
-			usu.setNome(req.getParameter("nome"));
-			usu.setEmail(req.getParameter("email"));
-			usu.setSenha(senha1);
+			Usuario usuario = new Usuario();
+			usuario.setNome(req.getParameter("nome"));
+			usuario.setEmail(req.getParameter("email"));
+			usuario.setSenha(senha1);
 			
 			UsuarioRepositorio repositorio = new UsuarioRepositorio();
-			repositorio.inserirUsuario(usu);
+			repositorio.inserirUsuario(usuario);
 			
 			
 			//redirecionar o usuário para a página de login
