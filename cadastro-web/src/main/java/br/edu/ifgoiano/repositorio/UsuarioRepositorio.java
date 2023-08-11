@@ -13,10 +13,9 @@ import br.edu.ifgoiano.entidade.Usuario;
 public class UsuarioRepositorio {
 
 	private Connection getConnection() throws SQLException {
-		return DriverManager.
-		        getConnection("jdbc:h2:~/usuariodb", "sa", "sa");
+		return DriverManager.getConnection("jdbc:h2:~/usuariodb", "sa", "sa");
 	}
-	
+
 	public List<Usuario> listarUsuario(){
 		ArrayList<Usuario> lstUsuario = new ArrayList<Usuario>();
 		
@@ -45,32 +44,32 @@ public class UsuarioRepositorio {
 	}
 
 	public void inserirUsuario(Usuario usuario) {
-		
-		//Criar a SQL de insert 
+
+		// Criar a SQL de insert
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into usuario ");
 		sql.append("(nome, email, senha) ");
 		sql.append("values(?, ?, ?)");
-		
-		//Abrir uma conexão
-		try(Connection conn = this.getConnection();
-				
-			//Preparar a SQL para ser executada
-			PreparedStatement pst = conn.prepareStatement(sql.toString());){
-			
-			//Executar a SQL
+
+		// Abrir uma conexão
+		try (Connection conn = this.getConnection();
+
+				// Preparar a SQL para ser executada
+				PreparedStatement pst = conn.prepareStatement(sql.toString());) {
+
+			// Executar a SQL
 			pst.setString(1, usuario.getNome());
 			pst.setString(2, usuario.getEmail());
 			pst.setString(3, usuario.getSenha());
 			pst.execute();
-			
+
 			conn.commit();
-			
+
 		} catch (SQLException e) {
 			System.out.println("Erro na inclusão de usuario");
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }
